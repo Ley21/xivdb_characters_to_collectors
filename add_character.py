@@ -1,6 +1,5 @@
 import requests
 import json
-import multiprocessing
 
 def addCharacter(x):
     url = 'http://ffxivcollector.com/handler/charakter.php?id=%d&show=false' % (x)
@@ -17,7 +16,7 @@ def getId(x):
             return x
         return None
     
-p = multiprocessing.Pool(4)
-for result in p.imap_unordered(getId, range(14000000), chunksize=1):
+for index in range(14000000):
+    result = getId(index)
     if result != None:
         print addCharacter(result)
